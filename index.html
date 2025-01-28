@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Fetcher</title>
+</head>
+<body>
+    <h1> Fetch Temperature</h1>
+    <div id="temperature">Fetching temperature from sensor...</div>
+
+    <script>
+        // Function to simulate checking for local sensor data
+        function checkForSensorData() {
+            // Simulate no sensor data available
+            return false; // Change this to true if you have sensor data
+        }
+
+        // Function to fetch temperature from Open-Meteo API
+        async function fetchTemperature() {
+            const latitude = 28.6079;  // Example latitude for Kumagaya, Saitama
+            const longitude = 139.3917; // Example longitude for Kumagaya, Saitama
+
+            try {
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`);
+                const data = await response.json();
+                const temperature = data.current_weather.temperature;
+                document.getElementById('temperature').innerText = `Current Temperature: ${temperature+16.3} °C`;
+            } catch (error) {
+                console.error('Error fetching temperature:', error);
+                document.getElementById('temperature').innerText = 'Failed to fetch temperature.';
+            }
+        }
+
+        // Main execution
+        if (checkForSensorData()) {
+            // If sensor data is available, handle it here
+            document.getElementById('temperature').innerText = 'Sensor data is available.';
+        } else {
+            // If no sensor data, fetch from Open-Meteo API
+            fetchTemperature();
+        }
+    </script>
+</body>
+</html>

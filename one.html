@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Data Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+        }
+        .card-hover {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen p-6">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold text-white text-center mb-8">Machine Data Dashboard</h1>
+        
+        <!-- Add Machine Form -->
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4">Add New Machine</h2>
+            <form id="add-machine-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="machine-id" placeholder="Machine ID" class="p-2 border rounded" required>
+                <input type="number" id="cpu-threshold" placeholder="CPU Utilization Threshold (%)" class="p-2 border rounded" required>
+                <input type="number" id="memory-threshold" placeholder="Memory Usage Threshold (%)" class="p-2 border rounded" required>
+                <input type="number" id="temp-threshold" placeholder="Air Temperature Threshold (K)" class="p-2 border rounded" required>
+                <input type="number" id="disk-threshold" placeholder="Disk I/O Threshold" class="p-2 border rounded" required>
+                <input type="number" id="latency-threshold" placeholder="Network Latency Threshold (ms)" class="p-2 border rounded" required>
+                <input type="number" id="power-threshold" placeholder="Power Consumption Threshold (W)" class="p-2 border rounded" required>
+                <input type="number" id="vibration-threshold" placeholder="Vibration Level Threshold (g)" class="p-2 border rounded" required>
+                <input type="number" id="cooling-threshold" placeholder="Cooling Efficiency Threshold (%)" class="p-2 border rounded" required>
+                <input type="number" id="throughput-threshold" placeholder="Network Throughput Threshold (Mbps)" class="p-2 border rounded" required>
+                <button type="submit" class="col-span-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Add Machine</button>
+            </form>
+        </div>
+
+        <!-- Machine Cards -->
+        <div id="machine-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Machine cards will be dynamically inserted here -->
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
