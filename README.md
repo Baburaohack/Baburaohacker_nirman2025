@@ -5,3 +5,6 @@
 # Problem Statement #
   Predicting and Preventing Infrastructure Failures using AI-powered Maintenance
   
+
+# Explanation Video #
+  https://drive.google.com/file/d/1w0NHVWLkxOMRvYbdWb5wGKSRsTMIziJ1/view?usp=sharing
