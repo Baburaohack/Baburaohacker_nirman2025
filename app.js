@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
     const machineCardsContainer = document.getElementById('machine-cards');
-    const addMachineForm = document.getElementById('add-machine-form');
+    const userInfoForm = document.getElementById('user-info-form');
+    const userInfoDisplay = document.getElementById('user-info');
+    const displayName = document.getElementById('display-name');
+    const displayCompany = document.getElementById('display-company');
+    const displayIndustry = document.getElementById('display-industry');
+    const displayTagline = document.getElementById('display-tagline');
 
     // Default thresholds
     let thresholds = {
@@ -192,49 +197,41 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Function to add a new machine
-    function addMachine(machineId, customThresholds) {
-        const machine = generateRandomMachineData(machineId);
-        const card = createMachineCard(machine);
-        machineCardsContainer.appendChild(card);
-
-        const chart = initializeChart(machine);
-        machines.push(machine);
-        charts.push(chart);
-
-        // Update thresholds if custom thresholds are provided
-        if (customThresholds) {
-            thresholds = { ...thresholds, ...customThresholds };
-        }
-    }
-
-    // Initialize the dashboard with 5 machines
+    // Initialize the dashboard with 5 machines (this will be shown only after the form is submitted)
     const machines = [];
     const charts = [];
 
-    for (let i = 1; i <= 5; i++) {
-        addMachine(i);
-    }
-
-    // Update data every 2 seconds
-    setInterval(() => updateMachineData(machines, charts), 2000);
-
-    // Handle form submission to add a new machine
-    addMachineForm.addEventListener('submit', function (e) {
+    userInfoForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        const machineId = document.getElementById('machine-id').value;
-        const customThresholds = {
-            cpuUtilization: parseInt(document.getElementById('cpu-threshold').value),
-            memoryUsage: parseInt(document.getElementById('memory-threshold').value),
-            airTemperature: parseInt(document.getElementById('temp-threshold').value),
-            diskIO: parseInt(document.getElementById('disk-threshold').value),
-            networkLatency: parseInt(document.getElementById('latency-threshold').value),
-            powerConsumption: parseInt(document.getElementById('power-threshold').value),
-            vibrationLevel: parseFloat(document.getElementById('vibration-threshold').value),
-            coolingEfficiency: parseInt(document.getElementById('cooling-threshold').value),
-            networkThroughput: parseInt(document.getElementById('throughput-threshold').value)
-        };
-        addMachine(machineId, customThresholds);
-        addMachineForm.reset();
+        const userName = document.getElementById('user-name').value;
+        const companyName = document.getElementById('company-name').value;
+        const industry = document.getElementById('industry').value;
+        const tagline = document.getElementById('tagline').value;
+
+        // Display user information
+        displayName.textContent = userName;
+        displayCompany.textContent = companyName;
+        displayIndustry.textContent = industry;
+        displayTagline.textContent = tagline;
+        userInfoDisplay.classList.remove('hidden');
+
+        // Optionally, you can hide the form after submission
+        userInfoForm.classList.add('hidden');
+
+        // Initialize the dashboard (this code will be executed after form submission)
+        for (let i = 1; i <= 5; i++) {
+            const machine = generateRandomMachineData(i);
+            machines.push(machine);
+            const card = createMachineCard(machine);
+            machineCardsContainer.appendChild(card);
+            const chart = initializeChart(machine);
+            charts.push(chart);
+        }
+
+        // Show the machine cards dashboard
+        machineCardsContainer.classList.remove('hidden');
+
+        // Update data every 2 seconds
+        setInterval(() => updateMachineData(machines, charts), 2000);
     });
 });

@@ -1,0 +1,431 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        About Us - Rakshak AI
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <style>
+        /* Custom CSS for animations and background */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .slide-in {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .popup-animation {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+
+        /* Light pink and blue gradient background */
+        body {
+            background: linear-gradient(135deg, #ffe4e6, #e0f7fa, #ffe4e6);
+            background-size: 200% 200%;
+            animation: gradientAnimation 10s ease infinite;
+        }
+    </style>
+</head>
+
+<body class="font-roboto text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow">
+        <br>
+        <div class="container mx-auto ml-6 px-4 py-6 flex justify-between items-center">
+            <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+                <div class="container mx-auto px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="cyber-border rounded-full p-2">
+                                <i class="fas fa-robot text-3xl text-blue-500">
+                                </i>
+                            </div>
+                            <span
+                                class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                                Rakshak.AI
+                            </span>
+                        </div>
+                        <div class="flex space-x-8">
+                            <a class="text-gray-700 hover:text-blue-600 transition-all font-medium" href="index.html">
+                                Home
+                            </a>
+                            <a class="text-gray-700 hover:text-blue-600 transition-all font-medium" href="about.html">
+                                About
+                            </a>
+                            <a class="text-gray-700 hover:text-blue-600 transition-all font-medium"
+                                href="services.html">
+                                Services
+                            </a>
+                            <a class="text-gray-700 hover:text-blue-600 transition-all font-medium"
+                                href="contact_us.html">
+                                Contact-US
+                            </a>
+                            <a href="log.html">
+                                <button
+                                    class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
+                                    Dashboard
+                                </button>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-10">
+        <!-- About Us Section -->
+        <section class="mb-10 text-center fade-in">
+            <h2 class="text-4xl font-bold mb-4">
+                About Us
+            </h2>
+            <p class="text-xl mb-6">
+                Welcome to Rakshak AI
+            </p>
+            <p class="mb-4">
+                At
+                <strong>
+                    Rakshak AI
+                </strong>
+                , we transform industries with advanced AI-powered solutions. Our mission is to empower businesses
+                through AI and data analytics, optimizing operations and enhancing decision-making.
+            </p>
+        </section>
+        <!-- Who We Are Section -->
+        <section class="mb-10 bg-white p-8 rounded-tl-3xl rounded-br-3xl shadow-lg hover-scale slide-in">
+            <h3 class="text-3xl font-bold mb-4">
+                Who We Are
+            </h3>
+            <p class="mb-4">
+                Rakshak AI was founded to bring AI to the forefront of industry operations. We provide smart, reliable
+                solutions to predict, prevent, and solve challenges across sectors like manufacturing, construction,
+                energy, and agriculture.
+            </p>
+            <p class="mb-4">
+                Our team of engineers, data scientists, and industry experts is dedicated to creating smarter, safer,
+                and more efficient industrial environments.
+            </p>
+        </section>
+        <!-- What We Do Section -->
+        <section class="mb-10 bg-white p-8 rounded-tr-3xl rounded-bl-3xl shadow-lg hover-scale slide-in">
+            <h3 class="text-3xl font-bold mb-4">
+                What We Do
+            </h3>
+            <p class="mb-4">
+                We specialize in AI-driven data analytics and machine monitoring. Our platform provides real-time
+                insights into machine performance, helping organizations optimize usage and predict failures.
+            </p>
+            <ul class="list-disc list-inside mb-4">
+                <li>
+                    <strong>
+                        Enhance Machine Performance
+                    </strong>
+                    : Real-time data analysis for equipment health.
+                </li>
+                <li>
+                    <strong>
+                        Predict Failures
+                    </strong>
+                    : Spot potential failures early to avoid downtime.
+                </li>
+                <li>
+                    <strong>
+                        Optimize Operations
+                    </strong>
+                    : Improve efficiency and reduce costs.
+                </li>
+                <li>
+                    <strong>
+                        Custom Solutions
+                    </strong>
+                    : Tailored to meet your industry's unique needs.
+                </li>
+            </ul>
+        </section>
+        <!-- Our Vision Section -->
+        <section class="mb-10 bg-white p-8 rounded-tl-3xl rounded-br-3xl shadow-lg hover-scale slide-in">
+            <h3 class="text-3xl font-bold mb-4">
+                Our Vision
+            </h3>
+            <p class="mb-4">
+                Our vision is to be the global leader in AI-driven solutions, helping industries operate smarter and
+                more efficiently. We aim to be the trusted partner for organizations looking to future-proof their
+                operations.
+            </p>
+        </section>
+        <!-- Our Values Section -->
+        <section class="mb-10 bg-white p-8 rounded-tr-3xl rounded-bl-3xl shadow-lg hover-scale slide-in">
+            <h3 class="text-3xl font-bold mb-4">
+                Our Values
+            </h3>
+            <ul class="list-disc list-inside mb-4">
+                <li>
+                    <strong>
+                        Innovation
+                    </strong>
+                    : Pushing the boundaries of AI and data analytics.
+                </li>
+                <li>
+                    <strong>
+                        Integrity
+                    </strong>
+                    : Honesty and transparency in everything we do.
+                </li>
+                <li>
+                    <strong>
+                        Excellence
+                    </strong>
+                    : Striving for perfection in our products and services.
+                </li>
+                <li>
+                    <strong>
+                        Customer-Centricity
+                    </strong>
+                    : Tailored solutions for our clients' needs.
+                </li>
+            </ul>
+        </section>
+        <!-- Why Choose Us Section -->
+        <section class="mb-10 bg-white p-8 rounded-tl-3xl rounded-br-3xl shadow-lg hover-scale slide-in">
+            <h3 class="text-3xl font-bold mb-4">
+                Why Choose Rakshak AI?
+            </h3>
+            <ul class="list-disc list-inside mb-4">
+                <li>
+                    <strong>
+                        Cutting-Edge Technology
+                    </strong>
+                    : Latest advancements in AI and machine learning.
+                </li>
+                <li>
+                    <strong>
+                        Industry Expertise
+                    </strong>
+                    : Deep understanding of diverse industries.
+                </li>
+                <li>
+                    <strong>
+                        Proven Results
+                    </strong>
+                    : Improved efficiency, productivity, and cost savings.
+                </li>
+                <li>
+                    <strong>
+                        Customer Support
+                    </strong>
+                    : Dedicated guidance every step of the way.
+                </li>
+            </ul>
+        </section>
+        <!-- Join Us Section -->
+        <section class="text-center fade-in">
+            <h3 class="text-3xl font-bold mb-4">
+                Join Us in the AI Revolution
+            </h3>
+            <p class="mb-4">
+                At Rakshak AI, we are partners in your success. Whether you're enhancing current systems or transforming
+                operations, we're here to help.
+            </p>
+            <a href="contact_us.html">
+                <button
+                    class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg hover:scale-105 transition-transform shadow-lg">
+                    contact-us
+                </button>
+        </section>
+        <!-- Team Section -->
+        <section class="mt-20 text-center fade-in">
+            <h3 class="text-3xl font-bold mb-8">
+                Our Team
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-scale">
+                    <img alt="Portrait of Rishabh Modi, AI Engineer"
+                        class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"
+                        src="https://th.bing.com/th/id/OIP.ENWeBWnKhW-TRRAnXKSlowHaHa?w=209&h=209&c=7&r=0&o=5&dpr=1.3&pid=1.7" />
+                    <h4 class="text-xl font-bold">
+                        Rishabh Modi
+                    </h4>
+                    <p class="text-gray-600">
+                        AI Engineer
+                    </p>
+                </div>
+                <!-- Team Member 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-scale">
+                    <img alt="Portrait of Saimon, Data Scientist"
+                        class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"
+                        src="https://th.bing.com/th/id/OIP.zxK6GXMLrEW4sua6g66fugHaKJ?w=142&h=195&c=7&r=0&o=5&dpr=1.3&pid=1.7" />
+                    <h4 class="text-xl font-bold">
+                        Saimon
+                    </h4>
+                    <p class="text-gray-600">
+                        Data Scientist
+                    </p>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-scale">
+                    <img alt="Portrait of Amit Jha, Software Developer"
+                        class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"
+                        src="https://th.bing.com/th/id/OIP.Z306v3XdxhOaxBFGfHku7wHaHw?w=194&amp;h=203&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.3&amp;pid=1.7" />
+                    <h4 class="text-xl font-bold">
+                        Amit Jha
+                    </h4>
+                    <p class="text-gray-600">
+                        Software Developer
+                    </p>
+                </div>
+                <!-- Team Member 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg hover-scale">
+                    <img alt="Portrait of Amit Singh, Project Manager"
+                        class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"
+                        src="https://th.bing.com/th/id/OIP.hSwkc0Rvsb8IZAeFH6IavgHaHa?w=214&amp;h=213&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.3&amp;pid=1.7" />
+                    <h4 class="text-xl font-bold">
+                        Amit Singh
+                    </h4>
+                    <p class="text-gray-600">
+                        Project Manager
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-white shadow mt-10">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+            <p class="text-gray-700">
+                © 2023 Rakshak AI. All rights reserved.
+            </p>
+            <div class="flex space-x-4">
+                <a class="text-gray-700 hover:text-gray-900" href="#">
+                    <i class="fab fa-facebook-f">
+                    </i>
+                </a>
+                <a class="text-gray-700 hover:text-gray-900" href="#">
+                    <i class="fab fa-twitter">
+                    </i>
+                </a>
+                <a class="text-gray-700 hover:text-gray-900" href="#">
+                    <i class="fab fa-linkedin-in">
+                    </i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <!-- Popup Section -->
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden" id="popup">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full popup-animation">
+            <h3 class="text-2xl font-bold mb-4">
+                Contact Us
+            </h3>
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700" for="name">
+                        Name
+                    </label>
+                    <input
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        id="name" type="text" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700" for="email">
+                        Email
+                    </label>
+                    <input
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        id="email" type="email" />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700" for="message">
+                        Message
+                    </label>
+                    <textarea
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        id="message">
+      </textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button class="bg-gray-600 text-white px-4 py-2 rounded-lg mr-2 hover:bg-gray-700"
+                        onclick="togglePopup()" type="button">
+                        Cancel
+                    </button>
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700" type="submit">
+                        Send
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // Toggle Popup
+        function togglePopup() {
+            const popup = document.getElementById('popup');
+            popup.classList.toggle('hidden');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

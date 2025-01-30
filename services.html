@@ -1,0 +1,308 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        Industrial Automation Suite
+    </title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .floating-cube {
+            animation: float 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        .hover-3d {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-3d:hover {
+            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) translateY(-5px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .cyber-border {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4f46e5, #22d3ee, #4f46e5);
+            z-index: -1;
+            animation: borderFlow 3s linear infinite;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        @keyframes borderFlow {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-sans">
+    <!-- Glassmorphism Navbar -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="cyber-border rounded-full p-2">
+                        <i class="fas fa-robot text-3xl text-blue-500">
+                        </i>
+                    </div>
+                    <span
+                        class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Rakshak.AI
+                    </span>
+                </div>
+                <div class="flex space-x-8">
+                    <a class="text-gray-700 hover:text-blue-600 transition-all font-medium" href="index.html">
+                        Home
+                    </a>
+                    <a class="text-gray-700 hover:text-blue-600 transition-all font-medium" href="about.html">
+                        About
+                    </a>
+                    <a class="text-gray-700 hover:text-blue-600 transition-all font-medium" href="services.html">
+                        Services
+                    </a>
+                    <a class="text-gray-700 hover:text-blue-600 transition-all font-medium" href="contact_us.html">
+                        Contact-US
+                    </a>
+                    <a href="log.html">
+                        <button
+                            class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
+                            Dashboard
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Services Section -->
+    <section class="container mx-auto px-6 py-16">
+        <h2 class="text-5xl font-bold text-center mb-12 mt-12">
+            Our Services
+        </h2>
+        <div class="grid grid-cols-1">
+            <div class="flex flex-col md:flex-row items-center bg-white p-6 shadow-lg">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img alt="Real-time monitoring dashboard with various metrics and graphs"
+                    class="w-full md:w-1/3 h-80 object-cover"
+                    src="https://linkvada.com/assets/images/v1/gif/realtime-seo.gif" />
+                <div class="md:ml-6 mt-4 md:mt-0">
+                    <h3 class="text-2xl font-bold">
+                        Comprehensive Real-time Monitoring
+                    </h3>
+                    <p class="text-gray-600 mt-2 text-lg">
+                        Stay updated with real-time data and analytics to ensure optimal performance. Our system
+                        provides detailed insights and alerts to help you make informed decisions quickly and
+                        efficiently. With our real-time monitoring, you can track key metrics and performance
+                        indicators, ensuring that your operations run smoothly and effectively.
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row-reverse items-center bg-white p-6 shadow-lg">
+                <img alt="Predictive maintenance tools and alerts" class="w-full md:w-1/2 h-80 object-cover"
+                    src="https://paninastudio.com/wp-content/uploads/2024/05/maintence.gif" />
+                <div class="md:mr-6 mt-4 md:mt-0">
+                    <h3 class="text-2xl font-bold">
+                        Predictive Maintenance
+                    </h3>
+                    <p class="text-gray-600 mt-2 text-lg">
+                        Anticipate and address maintenance needs before they become critical issues. Our predictive
+                        maintenance tools use advanced algorithms to forecast potential failures and schedule
+                        maintenance activities proactively. This helps in reducing downtime, extending equipment life,
+                        and saving costs associated with unexpected breakdowns.
+                    </p>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="flex flex-col md:flex-row items-center bg-white p-6 shadow-lg">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <img alt="Detailed reporting and analytics charts" class="w-full md:w-1/2 h-80 object-cover"
+                    src="https://th.bing.com/th/id/R.c41dfb5c3a297571a81e00e0c1d43333?rik=TtaHccMGfNhbVQ&riu=http%3a%2f%2fwrixte.co%2fwp-content%2fuploads%2f2023%2f03%2flogs-analytics.gif&ehk=IPNCaM4fr0%2bZraS%2fCUuOlB6uh7WOwjCTs%2bT9lNC35JI%3d&risl=&pid=ImgRaw&r=0" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="md:ml-6 mt-4 md:mt-0">
+                    <h3 class="text-2xl font-bold">
+                        Detailed Reporting &amp; Analytics
+                    </h3>
+                    <p class="text-gray-600 mt-2 text-lg">
+                        Gain insights with comprehensive reports and analytics tailored to your needs. Our platform
+                        offers customizable reporting features that allow you to generate detailed reports on various
+                        aspects of your operations. These reports provide valuable insights that can help you optimize
+                        processes, improve efficiency, and make data-driven decisions.
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row-reverse items-center bg-white p-6 shadow-lg">
+                <img alt="Quality control monitoring system" class="w-full md:w-1/2 h-80 object-cover"
+                    src="https://statusneo.com/wp-content/uploads/2023/03/GIF-image-1.gif" />
+                <div class="md:mr-6 mt-4 md:mt-0">
+                    <h3 class="text-2xl font-bold">
+                        Quality Control Monitoring
+                    </h3>
+                    <p class="text-gray-600 mt-2 text-lg">
+                        Ensure the highest quality standards with our advanced monitoring tools. Our quality control
+                        system continuously monitors production processes to detect any deviations from set standards.
+                        This helps in maintaining product quality, reducing defects, and ensuring customer satisfaction.
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center bg-white p-6 shadow-lg">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                    alt="Enhanced user interface with intuitive design" class="w-full md:w-1/2 h-80 object-cover"
+                    src="https://cdn.dribbble.com/users/180062/screenshots/6656692/web_design_1.gif" />
+                <div class="md:ml-6 mt-4 md:mt-0">
+                    <h3 class="text-2xl font-bold">
+                        Enhanced User Interface
+                    </h3>
+                    <p class="text-gray-600 mt-2 text-lg">
+                        Experience a user-friendly interface designed for efficiency and ease of use. Our platform
+                        features an intuitive design that simplifies navigation and enhances user experience. Whether
+                        you are a novice or an expert, our interface ensures that you can access and utilize all
+                        features effortlessly.
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row-reverse items-center bg-white p-6 shadow-lg">
+                <img alt="Full encryption capabilities for data security" class="w-full md:w-1/2 h-80 object-cover"
+                    src="https://th.bing.com/th/id/R.765ba103e01e1a3e2238f1a3babe6d13?rik=%2bqRRTP2vE6mabQ&riu=http%3a%2f%2fwww.reetro.io%2fimages%2fend-to-end-encryption.gif&ehk=u8V5IVuQex0LaZbOueXvb82Zk98yxX3Ejps8uk%2fxods%3d&risl=&pid=ImgRaw&r=0" />
+                <div class="md:mr-6 mt-4 md:mt-0">
+                    <h3 class="text-2xl font-bold">
+                        Full Encryption Capabilities
+                    </h3>
+                    <p class="text-gray-600 mt-2 text-lg">
+                        Protect your data with our robust encryption solutions. We prioritize your data security by
+                        implementing advanced encryption techniques that safeguard your information from unauthorized
+                        access. Our encryption capabilities ensure that your data remains confidential and secure at all
+                        times.
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center bg-white p-6 shadow-lg">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
+                    alt="Advanced support services team" class="w-full md:w-1/2 h-80 object-cover"
+                    src="https://www.bing.com/th/id/OGC.b7e6e2f87098ae1ccde3f31df66c8913?pid=1.7&rurl=https%3a%2f%2fimages.prismic.io%2fsmarttask%2faa0a44c7-b484-4768-9b30-e0403879cd84_livechat.gif%3fauto%3dcompress%2cformat&ehk=TOPjo8FvwT8547QvGQ8vZb7M6a0%2f7%2fHJwOsGQsjGbKc%3d" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="md:ml-6 mt-4 md:mt-0">
+                    <h3 class="text-2xl font-bold">
+                        Advanced Support Services
+                    </h3>
+                    <p class="text-gray-600 mt-2 text-lg">
+                        Receive top-notch support from our team of experts whenever you need it. Our support services
+                        are designed to assist you with any issues or queries you may have. We offer 24/7 support to
+                        ensure that you receive timely and effective assistance, helping you to maintain smooth and
+                        uninterrupted operations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Interactive Footer -->
+    <footer class="bg-gradient-to-br from-gray-800 to-gray-900 text-white">
+        <div class="container mx-auto px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">
+                        Innovation Hub
+                    </h4>
+                    <p class="text-gray-400">
+                        Leading the future of industrial automation through continuous innovation.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">
+                        Contact
+                    </h4>
+                    <p class="text-gray-400">
+                        innovation@industrialai.com
+                    </p>
+                    <p class="text-gray-400">
+                        +1 (555) 234-5678
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">
+                        Connect
+                    </h4>
+                    <div class="flex space-x-4">
+                        <a class="text-gray-400 hover:text-white transition" href="#">
+                            <i class="fab fa-linkedin fa-lg">
+                            </i>
+                        </a>
+                        <a class="text-gray-400 hover:text-white transition" href="#">
+                            <i class="fab fa-twitter fa-lg">
+                            </i>
+                        </a>
+                        <a class="text-gray-400 hover:text-white transition" href="#">
+                            <i class="fab fa-youtube fa-lg">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">
+                        Newsletter
+                    </h4>
+                    <input class="w-full p-3 rounded-lg bg-gray-700 border-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Enter your email" type="email" />
+                    <button class="mt-3 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>
+                    © 2023 Industrial AI. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Add hover effect to 3D elements
+        document.querySelectorAll('.hover-3d').forEach(element => {
+            element.addEventListener('mousemove', (e) => {
+                const rect = element.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / element.offsetWidth;
+                const y = (e.clientY - rect.top) / element.offsetHeight;
+
+                element.style.transform = perspective(1000px) rotateX(${(y - 0.5) * 10}deg) rotateY(${(x - 0.5) * 10}deg) translateZ(10px);
+            });
+
+        element.addEventListener('mouseleave', () => {
+            element.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+        });
+        });
+    </script>
+</body>
+
+</html>

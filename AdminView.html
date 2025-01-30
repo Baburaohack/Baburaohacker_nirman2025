@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Machine Maintenance Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #f7fafc;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .parameter-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #edf2f7;
+            border-radius: 5px;
+        }
+
+        .failure-probability {
+            font-weight: bold;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .warning {
+            color: red;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #f7fafc;
+            /* Light background */
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .parameter-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #edf2f7;
+            /* Light grey for parameter items */
+        }
+
+        .text-red-500:hover {
+            color: #e53e3e;
+            /* Darker red on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mx-auto p-6">
+        <div id="login" class="card p-6 mb-6">
+            <h1 class="text-3xl font-bold mb-4 text-center">Login</h1>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="username" class="block mb-2">Username:</label>
+                    <input type="text" id="username"
+                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="Enter username" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block mb-2">Password:</label>
+                    <input type="password" id="password"
+                        class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300"
+                        placeholder="Enter password" required>
+                </div>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-300">Login</button>
+            </form>
+        </div>
+
+        <div id="root" class="card hidden p-6">
+            <h1 class="text-3xl font-bold mb-4 text-center">Advanced Machine Maintenance Portal</h1>
+            <div class="mb-4">
+                <label for="industry" class="block mb-2">Select Industry:</label>
+                <select id="industry"
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+                    <option value="manufacturing">Manufacturing</option>
+                    <option value="energy">Energy</option>
+                    <option value="transportation">Transportation</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="machine" class="block mb-2">Select Machines:</label>
+                <select id="machine" multiple
+                    class="w-full p-3 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+                    <option value="">Select Machines</option>
+                </select>
+            </div>
+            <div class="mb-4 flex justify-between">
+                <button id="track-machines"
+                    class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">Track
+                    Selected Machines</button>
+                <button id="add-machine"
+                    class="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">Add
+                    New Machine</button>
+            </div>
+
+            <!-- Machine Details -->
+            <div id="machine-details" class="hidden mt-6">
+                <div id="machines-container"></div>
+                <div id="failure-probability" class="failure-probability"></div>
+                <div id="warning" class="warning hidden"></div>
+                <div id="failure-reasons" class=""></div>
+            </div>
+        </div>
+        <div id="machines-container"></div>
+
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script src="./script.js"></script> <!-- Assuming your JS code is in script.js -->
+</body>
+
+</html>
+
+
+
+<script>
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Simulate login success
+        gsap.to("#login", {
+            opacity: 0, duration: 0.5, onComplete: () => {
+                document.getElementById('root').classList.remove('hidden');
+                gsap.from("#root", { opacity: 0, duration: 0.5 });
+            }
+        });
+    });
+
+
+
+    const industriesData = {
+        'manufacturing': {
+            machines: [
+                {
+                    'name': 'CNC Machine',
+                    'parameters': ['Temperature', 'Vibration', 'RPM', 'Power Usage', 'Precision', 'Tool Wear'],
+                    'criticality': 0.9
+                },
+                {
+                    'name': 'Conveyor Belt',
+                    'parameters': ['Speed', 'Vibration', 'Load', 'Power Consumption', 'Belt Tension', 'Motor Temperature'],
+                    'criticality': 0.7
+                },
+                {
+                    'name': '3D Printer',
+                    'parameters': ['Temperature', 'Extruder Speed', 'Filament Flow', 'Power Consumption', 'Print Quality', 'Nozzle Condition'],
+                    'criticality': 0.8
+                },
+                {
+                    'name': 'Robotic Arm',
+                    'parameters': ['Precision', 'Speed', 'Load Capacity', 'Temperature', 'Vibration', 'Battery Level'],
+                    'criticality': 0.95
+                }
+            ],
+            thresholds: {
+                'Temperature': [30, 100],
+                'Vibration': [0, 10],
+                'RPM': [100, 2000],
+                'Power Usage': [0, 500],
+                'Precision': [0, 100],
+                'Tool Wear': [0, 100],
+                'Speed': [0, 10],
+                'Load': [0, 500],
+                'Belt Tension': [0, 100],
+                'Motor Temperature': [0, 120],
+                'Extruder Speed': [0, 200],
+                'Filament Flow': [0, 100],
+                'Power Consumption': [0, 100],
+                'Print Quality': [0, 100],
+                'Nozzle Condition': [0, 100],
+                'Load Capacity': [0, 1000],
+                'Battery Level': [0, 100]
+            }
+        },
+        'energy': {
+            machines: [
+                {
+                    'name': 'Wind Turbine',
+                    'parameters': ['Wind Speed', 'Power Output', 'Blade Angle', 'Temperature', 'Vibration', 'Generator Efficiency'],
+                    'criticality': 0.95
+                },
+                {
+                    'name': 'Solar Panel Array',
+                    'parameters': ['Sunlight Intensity', 'Panel Temperature', 'Power Output', 'Efficiency', 'Panel Angle', 'Dust Accumulation'],
+                    'criticality': 0.8
+                },
+                {
+                    'name': 'Transformer Station',
+                    'parameters': ['Voltage', 'Current', 'Temperature', 'Load', 'Oil Level', 'Transformer Efficiency'],
+                    'criticality': 0.9
+                }
+            ],
+            thresholds: {
+                'Wind Speed': [0, 50],
+                'Power Output': [0, 1000],
+                'Blade Angle': [0, 45],
+                'Temperature': [-10, 100],
+                'Vibration': [0, 5],
+                'Generator Efficiency': [70, 100],
+                'Sunlight Intensity': [0, 1000],
+                'Panel Temperature': [0, 80],
+                'Efficiency': [0, 100],
+                'Panel Angle': [0, 90],
+                'Dust Accumulation': [0, 100],
+                'Voltage': [0, 500],
+                'Current': [0, 200],
+                'Load': [0, 100],
+                'Oil Level': [0, 100],
+                'Transformer Efficiency': [70, 100]
+            }
+        },
+        'transportation': {
+            machines: [
+                {
+                    'name': 'Electric Train',
+                    'parameters': ['Speed', 'Battery Level', 'Motor Temperature', 'Power Consumption', 'Wheel Condition', 'Brake Performance'],
+                    'criticality': 0.95
+                },
+                {
+                    'name': 'Autonomous Vehicle',
+                    'parameters': ['Battery Level', 'Motor Temperature', 'Sensor Accuracy', 'Speed', 'Tire Pressure', 'System Diagnostics'],
+                    'criticality': 0.98
+                }
+            ],
+            thresholds: {
+                'Speed': [0, 300],
+                'Battery Level': [0, 100],
+                'Motor Temperature': [0, 120],
+                'Power Consumption': [0, 500],
+                'Wheel Condition': [0, 100],
+                'Brake Performance': [0, 100],
+                'Sensor Accuracy': [0, 100],
+                'Tire Pressure': [20, 50],
+                'System Diagnostics': [0, 100]
+            }
+        }
+    };
+
+    function generateMachineData(machine, thresholds) {
+        const data = {};
+        let failureProbability = 0;
+        const failureReasons = [];
+
+        machine.parameters.forEach(param => {
+            const [min, max] = thresholds[param] || [0, 100];
+            const range = max - min;
+
+            let value;
+            switch (param) {
+                case 'Temperature':
+                    value = Number((min + Math.random() * range).toFixed(1));
+                    break;
+                case 'Vibration':
+                    value = Number((Math.random() * max).toFixed(2));
+                    break;
+                case 'RPM':
+                    value = Math.floor(min + Math.random() * range);
+                    break;
+                default:
+                    value = Number((min + Math.random() * range).toFixed(1));
+            }
+
+            // Calculate parameter-specific failure contribution
+            const normalizedValue = (value - min) / range;
+            const paramFailureRisk = normalizedValue > 0.8 || normalizedValue < 0.2 ?
+                Math.abs(normalizedValue - 0.5) * 2 : 0;
+
+            failureProbability += paramFailureRisk;
+            data[param] = value;
+
+            // Collect failure reasons
+            if (normalizedValue > 0.8) {
+                failureReasons.push(`${param} is too high`);
+            } else if (normalizedValue < 0.2) {
+                failureReasons.push(`${param} is too low`);
+            }
+        });
+
+        // Normalize failure probability and add machine criticality
+        data.failureProbability = Math.min(
+            (failureProbability / machine.parameters.length) * machine.criticality,
+            1
+        );
+        data.failureReasons = failureReasons;
+
+        return data;
+    }
+
+    const industrySelect = document.getElementById('industry');
+    const machineSelect = document.getElementById('machine');
+    const machineDetails = document.getElementById('machine-details');
+    const machinesContainer = document.getElementById('machines-container');
+    const warningElement = document.getElementById('warning');
+
+    let historicalData = {};
+    let chartInstances = {};
+
+    function updateMachineSelect() {
+        const selectedIndustry = industrySelect.value;
+        const machines = industriesData[selectedIndustry].machines;
+
+        machineSelect.innerHTML = '';
+        machines.forEach(machine => {
+            const option = document.createElement('option');
+            option.value = machine.name;
+            option.textContent = machine.name;
+            machineSelect.appendChild(option);
+        });
+    }
+
+    function updateMachineDetails() {
+        const selectedIndustry = industrySelect.value;
+        const selectedMachineNames = Array.from(machineSelect.selectedOptions).map(option => option.value);
+
+        machinesContainer.innerHTML = ''; // Clear previous machine details
+        historicalData = {}; // Reset historical data
+
+        selectedMachineNames.forEach(selectedMachineName => {
+            const machine = industriesData[selectedIndustry].machines.find(m => m.name === selectedMachineName);
+            const thresholds = industriesData[selectedIndustry].thresholds;
+
+            const generatedData = generateMachineData(machine, thresholds);
+
+            // Initialize historicalData[selectedMachineName] as an array if it's not already initialized
+            if (!historicalData[selectedMachineName]) {
+                historicalData[selectedMachineName] = [];
+            }
+
+            historicalData[selectedMachineName].push(generatedData); // Add the generated data to the historical data
+            renderParameters(selectedMachineName, generatedData);
+            renderChart(selectedMachineName);
+        });
+
+        // Start real-time data generation
+        setInterval(() => {
+            selectedMachineNames.forEach(selectedMachineName => {
+                const machine = industriesData[selectedIndustry].machines.find(m => m.name === selectedMachineName);
+                const thresholds = industriesData[selectedIndustry].thresholds;
+                const newData = generateMachineData(machine, thresholds);
+
+                // Ensure historicalData[selectedMachineName] is initialized as an array
+                if (!historicalData[selectedMachineName]) {
+                    historicalData[selectedMachineName] = [];
+                }
+
+                historicalData[selectedMachineName].push(newData); // Add new data
+                if (historicalData[selectedMachineName].length > 10) {
+                    historicalData[selectedMachineName].shift(); // Keep only the last 10 entries
+                }
+
+                updateParameters(selectedMachineName, newData); // Update parameters
+                updateChart(selectedMachineName); // Update chart
+            });
+        }, 3000);
+    }
+
+    function renderParameters(machineName, data) {
+        const machineDiv = document.createElement('div');
+        machineDiv.id = `machine-${machineName}`; // Unique ID for each machine
+        machineDiv.className = 'mb-4';
+        machineDiv.innerHTML = `<h2 class="text-xl font-semibold mb-2">${machineName} Details</h2>`;
+        const parametersContainer = document.createElement('div');
+        parametersContainer.className = 'parameters-container grid grid-cols-1 gap-2 mb-4';
+
+        Object.entries(data).forEach(([param, value]) => {
+            if (param !== 'failureProbability' && param !== 'failureReasons') {
+                const parameterItem = document.createElement('div');
+                parameterItem.className = 'parameter-item';
+                parameterItem.setAttribute('data-param', param);
+                parameterItem.innerHTML = `<span>${param}:</span><span class="parameter-value">${value}</span>`;
+                parametersContainer.appendChild(parameterItem);
+            }
+        });
+
+        const failureProbability = data.failureProbability * 100;
+        const failureProbabilityElement = document.createElement('div');
+        failureProbabilityElement.className = 'failure-probability';
+        failureProbabilityElement.textContent = `Failure Probability: ${failureProbability.toFixed(2)}%`;
+        machineDiv.appendChild(failureProbabilityElement);
+
+        warningElement.className = failureProbability > 75 ? '' : 'hidden';
+        warningElement.textContent = '🚨 High risk of machine failure. Immediate maintenance recommended!';
+        machineDiv.appendChild(warningElement);
+
+        // Display failure reasons
+        const failureReasonsElement = document.createElement('div');
+        failureReasonsElement.className = 'failure-reasons';
+        failureReasonsElement.innerHTML = '';
+        if (data.failureReasons.length > 0) {
+            failureReasonsElement.classList.remove('hidden');
+            failureReasonsElement.innerHTML = `<strong>Reasons for Failure:</strong> ${data.failureReasons.join(', ')}`;
+            machineDiv.appendChild(failureReasonsElement);
+        } else {
+            failureReasonsElement.classList.add('hidden');
+        }
+
+        machineDiv.appendChild(parametersContainer);
+        machinesContainer.appendChild(machineDiv);
+    }
+
+    function updateParameters(machineName, data) {
+        const machineDiv = document.getElementById(`machine-${machineName}`);
+
+        // Check if the machineDiv exists
+        if (!machineDiv) {
+            console.error(`Machine div for ${machineName} not found.`);
+            return; // Exit the function if the machine div does not exist
+        }
+
+        const parametersContainer = machineDiv.querySelector('.parameters-container');
+
+        // Update parameters
+        Object.entries(data).forEach(([param, value]) => {
+            if (param !== 'failureProbability' && param !== 'failureReasons') {
+                const parameterItem = parametersContainer.querySelector(`.parameter-item[data-param="${param}"]`);
+                if (parameterItem) {
+                    parameterItem.querySelector('.parameter-value').textContent = value; // Update existing value
+                }
+            }
+        });
+
+        const failureProbability = data.failureProbability * 100;
+        const failureProbabilityElement = machineDiv.querySelector('.failure-probability');
+        failureProbabilityElement.textContent = `Failure Probability: ${failureProbability.toFixed(2)}%`;
+
+        // Update warning and failure reasons
+        warningElement.className = failureProbability > 75 ? '' : 'hidden';
+        warningElement.textContent = '🚨 High risk of machine failure. Immediate maintenance recommended!';
+
+        // Display failure reasons
+        const failureReasonsElement = machineDiv.querySelector('.failure-reasons');
+        failureReasonsElement.innerHTML = '';
+        if (data.failureReasons.length > 0) {
+            failureReasonsElement.classList.remove('hidden');
+            failureReasonsElement.innerHTML = `<strong>Reasons for Failure:</strong> ${data.failureReasons.join(', ')}`;
+        } else {
+            failureReasonsElement.classList.add('hidden');
+        }
+    }
+    function renderChart(machineName) {
+        const chartContainer = document.createElement('div');
+        chartContainer.className = 'chart-container';
+        const chartCanvas = document.createElement('canvas');
+        chartCanvas.id = `chart-${machineName}`;
+        chartContainer.appendChild(chartCanvas);
+        machinesContainer.appendChild(chartContainer);
+
+        const ctx = chartCanvas.getContext('2d');
+        chartInstances[machineName] = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: historicalData[machineName].map((_, index) => `Cycle ${index + 1}`),
+                datasets: [{
+                    label: 'Failure Probability',
+                    data: historicalData[machineName].map(data => data.failureProbability * 100),
+                    borderColor: historicalData[machineName][historicalData[machineName].length - 1].failureProbability * 100 > 75 ? 'red' : 'green',
+                    backgroundColor: 'rgba(255, 0, 0, 0.1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        title: {
+                            display: true,
+                            text: 'Failure Probability (%)'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function updateChart(machineName) {
+        const chartInstance = chartInstances[machineName];
+        const newData = historicalData[machineName].map(data => data.failureProbability * 100);
+
+        // Update the chart data
+        chartInstance.data.datasets[0].data = newData;
+        chartInstance.data.labels = historicalData[machineName].map((_, index) => `Cycle ${index + 1}`);
+        chartInstance.update(); // Refresh the chart
+    }
+
+    // Event Listeners
+    industrySelect.addEventListener('change', () => {
+        updateMachineSelect();
+        machineDetails.classList.add('hidden');
+    });
+
+    machineSelect.addEventListener('change', () => {
+        machineDetails.classList.remove('hidden');
+        updateMachineDetails();
+    });
+
+    // Login Functionality
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === 'admin' && password === 'root') {
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('root').classList.remove('hidden');
+            updateMachineSelect();
+        } else {
+            alert('Invalid credentials. Please try again.');
+        }
+    });
+
+    // Add New Machine Functionality
+    document.getElementById('add-machine').addEventListener('click', () => {
+        const newMachineName = prompt("Enter the name of the new machine:");
+        if (newMachineName) {
+            const selectedIndustry = industrySelect.value;
+            industriesData[selectedIndustry].machines.push({
+                name: newMachineName,
+                parameters: ['New Parameter 1', 'New Parameter 2'], // Placeholder parameters
+                criticality: 0.5 // Default criticality
+            });
+            updateMachineSelect();
+            alert(`Machine "${newMachineName}" added successfully!`);
+        }
+    });
+
+    // Add New Machine Functionality
+    document.getElementById('add-machine').addEventListener('click', () => {
+        const newMachineName = prompt("Enter the name of the new machine:");
+        if (newMachineName) {
+            const selectedIndustry = industrySelect.value;
+
+            // Prompt for parameters
+            const parametersInput = prompt("Enter parameters for the new machine (comma-separated):");
+            const parameters = parametersInput ? parametersInput.split(',').map(param => param.trim()) : [];
+
+            // Prompt for thresholds
+            const thresholds = {};
+            parameters.forEach(param => {
+                const min = prompt(`Enter minimum threshold for ${param}:`);
+                const max = prompt(`Enter maximum threshold for ${param}:`);
+                thresholds[param] = [parseFloat(min), parseFloat(max)];
+            });
+
+            // Add the new machine to the industriesData
+            industriesData[selectedIndustry].machines.push({
+                name: newMachineName,
+                parameters: parameters,
+                criticality: 0.5 // Default criticality
+            });
+
+            // Add the thresholds to the industry data
+            industriesData[selectedIndustry].thresholds = {
+                ...industriesData[selectedIndustry].thresholds,
+                ...thresholds
+            };
+
+            updateMachineSelect();
+            alert(`Machine "${newMachineName}" added successfully!`);
+        }
+    });
+
+    function removeMachine(machineName) {
+        const machineDiv = document.getElementById(`machine-${machineName}`);
+        if (machineDiv) {
+            gsap.to(machineDiv, {
+                opacity: 0,
+                duration: 0.5,
+                onComplete: () => {
+                    machinesContainer.removeChild(machineDiv);
+                    // Update any other necessary state or UI elements here
+                }
+            });
+        }
+    }
+
+</script>
+</body>
+
+</html>

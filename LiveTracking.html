@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Warehouse Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+        }
+        .card-hover {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen p-6">
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold text-white text-center mb-8">Machine Data Dashboard</h1>
+        
+        <!-- User Information Form -->
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-4">User Information</h2>
+            <form id="user-info-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="user-name" placeholder="Your Name" class="p-2 border rounded" required>
+                <input type="text" id="company-name" placeholder="Company Name" class="p-2 border rounded" required>
+                
+                <!-- Industry Dropdown Menu -->
+                <select id="industry" class="p-2 border rounded" required>
+                    <option value="">Select Industry</option>
+                    <option value="manufacturing">Manufacturing</option>
+                    <option value="construction">Construction</option>
+                    <option value="energy">Energy</option>
+                    <option value="agriculture">Agriculture</option>
+                </select>
+                
+                <input type="text" id="tagline" placeholder="Tagline" class="p-2 border rounded" required>
+                <button type="submit" class="col-span-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Submit</button>
+            </form>
+        </div>
+
+        <!-- User Info Display -->
+        <div id="user-info" class="text-white text-center mb-8 hidden">
+            <h2 class="text-2xl font-bold">Welcome, <span id="display-name"></span>!</h2>
+            <p class="text-lg">Company: <span id="display-company"></span></p>
+            <p class="text-lg">Industry: <span id="display-industry"></span></p>
+            <p class="text-lg">Tagline: <span id="display-tagline"></span></p>
+        </div>
+
+        <!-- Machine Cards -->
+        <div id="machine-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Machine cards will be dynamically inserted here -->
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
